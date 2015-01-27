@@ -1,0 +1,12 @@
+# Artlist web service [unit file](http://freedesktop.org/wiki/Software/systemd/) for [CoreOS](https://coreos.com/).
+#
+# miniLock Postcard HTTPS service runs in a container named `artlist`
+# from a [Docker](https://docker.com/) image named `artlist_image`.
+
+[Unit]
+Description=THE ARTLIST web service
+After=docker.service
+
+[Service]
+ExecStart=/usr/bin/docker run --name minipost --rm --publish 80:80 --publish 443:443 --volume /home/core/artlist:/artlist artlist_image
+ExecStop=/usr/bin/docker stop artlist
